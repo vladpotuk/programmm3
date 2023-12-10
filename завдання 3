@@ -1,0 +1,28 @@
+text1 = input("Введіть перший текст: ")
+text2 = input("Введіть другий текст: ")
+
+# 3.1. Чи є спільні слова
+words_set1 = set(word.strip('.,?!') for word in text1.split())
+words_set2 = set(word.strip('.,?!') for word in text2.split())
+common_words_exist = len(words_set1 & words_set2) > 0
+
+if common_words_exist:
+    print("Є спільні слова в текстах.")
+else:
+    print("Немає спільних слів в текстах.")
+
+# 3.2. Слово, що повторюється найчастіше
+words_list1 = [word.strip('.,?!') for word in text1.split()]
+words_list2 = [word.strip('.,?!') for word in text2.split()]
+all_words = words_list1 + words_list2
+
+word_counts = {}
+for word in all_words:
+    word_counts[word] = word_counts.get(word, 0) + 1
+
+most_common_word, occurrences = max(word_counts.items(), key=lambda x: x[1], default=(None, 0))
+
+if occurrences > 1:
+    print(f"Найчастіше повторюється слово: {most_common_word}")
+else:
+    print("Усі слова унікальні.")
